@@ -34,7 +34,7 @@ if user is wrong after 9 times, award loss -->
     var wins = 0;
     var losses = 0;
     var guesses = 9;
-    // var usedLetters = []
+    var usedLetters = [];
 
     // selects a random letter for the computer
     var computerGuess = options[Math.floor(Math.random() * options.length)];
@@ -44,34 +44,53 @@ if user is wrong after 9 times, award loss -->
     // when the user presses a key, log entree as userGuess
     document.onkeyup = function() {
         var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-        
         console.log(userGuess);
+        // This pushes the user guess into the usedLetters array
+        usedLetters.push(userGuess);
+        // confirms the user is entering a letter, if not, alert
+        for (var i = 0; i < options.length; i++) {
+            if (userGuess == options[i]) {
+                
+                
+        
 
-            if (userGuess==computerGuess) {
-                wins++;
-                guesses = 10;
-            } 
+                    // if user guesses correctly, give them a win and reset the game and guesses
+                    if (userGuess==computerGuess) {
+                        wins++;
+                        guesses = 10;
+                        computerGuess = options[Math.floor(Math.random() * options.length)];
+                        console.log(computerGuess)
+                        usedLetters = [];
+                    } 
+                    
+                    // if user does not guess correctly, penalize their guesses by 1
+                    if (userGuess !==computerGuess) {
+                        guesses--;
+                    }
+
+                    // if the user runs out of guesses, give them a loss and reset the game and guesses
+                    if (guesses == 0) {
+                    losses++;
+                    guesses = 9;
+                    computerGuess = options[Math.floor(Math.random() * options.length)];
+                    console.log(computerGuess)
+                    usedLetters = [];
+                    }
+                
             
-            if (userGuess !==computerGuess) {}
-                guesses--;
 
-            if (guesses == 0) {
-            losses++;
-            guesses = 9;
+                // update the scoreboard/stats    
+                var html = "<h1>The Psychic Game</h1>" +
+                "<p>Guess what letter I'm thinking of</p>" +
+                "<p>Wins: " + wins + "</p>" +
+                "<p>Losses: " + losses + "</p>" +
+                "<p>Guesses left: " + guesses + "</p>" +
+                "<p>Your guesses so far: " + usedLetters + "</p>";
+
+                document.querySelector('#game').innerHTML = html;
+
+        } 
         }
-    
-
-            
-        var html = "<h1>The Psychic Game</h1>" +
-        "<p>Guess what letter I'm thinking of</p>" +
-        "<p>Wins: " + wins + "</p>" +
-        "<p>Losses: " + losses + "</p>" +
-        "<p>Guesses left: " + guesses + "</p>" +
-        "<p>Your guesses so far: </p>";
-
-        document.querySelector('#game').innerHTML = html;
-
-
             
     }
 
