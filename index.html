@@ -48,42 +48,35 @@ if user is wrong after 9 times, award loss -->
         // confirms the user is entering a letter, if not, alert
         for (var i = 0; i < options.length; i++) {
             if (userGuess == options[i]) {
-                    // This pushes the user guess into the usedLetters array. If selected letter has already been used, do not push to array
+                    // this pushes the user guess into the usedLetters array. If selected letter has already been used, do not push to array
                     if (usedLetters.includes(userGuess)) {
                         console.log("This worked")
                     } else {
                         usedLetters.push(userGuess);
+                        // if user guesses correctly, give them a win and reset the game and guesses
+                        if (userGuess == computerGuess) {
+                            wins++;
+                            guesses = 10;
+                            computerGuess = options[Math.floor(Math.random() * options.length)];
+                            console.log(computerGuess)
+                            usedLetters = [];
+                        }
+
+                        // if user does not guess correctly, penalize their guesses by 1
+                        if (userGuess !== computerGuess) {
+                            guesses--;
+                        }
+
+                        // if the user runs out of guesses, give them a loss and reset the game and guesses
+                        if (guesses == 0) {
+                            losses++;
+                            guesses = 9;
+                            computerGuess = options[Math.floor(Math.random() * options.length)];
+                            console.log(computerGuess)
+                            usedLetters = [];
+                        }
                     }
                     
-                
-                
-        
-
-                    // if user guesses correctly, give them a win and reset the game and guesses
-                    if (userGuess==computerGuess) {
-                        wins++;
-                        guesses = 10;
-                        computerGuess = options[Math.floor(Math.random() * options.length)];
-                        console.log(computerGuess)
-                        usedLetters = [];
-                    } 
-                    
-                    // if user does not guess correctly, penalize their guesses by 1
-                    if (userGuess !==computerGuess) {
-                        guesses--;
-                    }
-
-                    // if the user runs out of guesses, give them a loss and reset the game and guesses
-                    if (guesses == 0) {
-                    losses++;
-                    guesses = 9;
-                    computerGuess = options[Math.floor(Math.random() * options.length)];
-                    console.log(computerGuess)
-                    usedLetters = [];
-                    }
-                
-            
-
                 // update the scoreboard/stats    
                 var html = "<h1>The Psychic Game</h1>" +
                 "<p>Guess what letter I'm thinking of</p>" +
@@ -95,8 +88,7 @@ if user is wrong after 9 times, award loss -->
                 document.querySelector('#game').innerHTML = html;
 
             } 
-        }
-            
+        }    
     }
 
 </script>
