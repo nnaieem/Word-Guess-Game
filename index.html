@@ -48,8 +48,13 @@ if user is wrong after 9 times, award loss -->
         // confirms the user is entering a letter, if not, alert
         for (var i = 0; i < options.length; i++) {
             if (userGuess == options[i]) {
-                    // This pushes the user guess into the usedLetters array
-                    usedLetters.push(userGuess);
+                    // This pushes the user guess into the usedLetters array. If selected letter has already been used, do not push to array
+                    if (usedLetters.includes(userGuess)) {
+                        console.log("This worked")
+                    } else {
+                        usedLetters.push(userGuess);
+                    }
+                    
                 
                 
         
