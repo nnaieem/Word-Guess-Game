@@ -45,11 +45,11 @@ if user is wrong after 9 times, award loss -->
     document.onkeyup = function() {
         var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
         console.log(userGuess);
-        // This pushes the user guess into the usedLetters array
-        usedLetters.push(userGuess);
         // confirms the user is entering a letter, if not, alert
         for (var i = 0; i < options.length; i++) {
             if (userGuess == options[i]) {
+                    // This pushes the user guess into the usedLetters array
+                    usedLetters.push(userGuess);
                 
                 
         
@@ -89,7 +89,7 @@ if user is wrong after 9 times, award loss -->
 
                 document.querySelector('#game').innerHTML = html;
 
-        } 
+            } 
         }
             
     }
