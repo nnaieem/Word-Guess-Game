@@ -50,7 +50,7 @@ if user is wrong after 9 times, award loss -->
             if (userGuess == options[i]) {
                     // this pushes the user guess into the usedLetters array. If selected letter has already been used, do not push to array
                     if (usedLetters.includes(userGuess)) {
-                        console.log("This worked")
+                        alert("You've already tried the letter " + userGuess);
                     } else {
                         usedLetters.push(userGuess);
                         // if user guesses correctly, give them a win and reset the game and guesses
@@ -60,6 +60,7 @@ if user is wrong after 9 times, award loss -->
                             computerGuess = options[Math.floor(Math.random() * options.length)];
                             console.log(computerGuess)
                             usedLetters = [];
+                            alert("You win!");
                         }
 
                         // if user does not guess correctly, penalize their guesses by 1
@@ -74,6 +75,7 @@ if user is wrong after 9 times, award loss -->
                             computerGuess = options[Math.floor(Math.random() * options.length)];
                             console.log(computerGuess)
                             usedLetters = [];
+                            alert("You lose!");
                         }
                     }
                     
